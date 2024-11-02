@@ -6,6 +6,11 @@ const instance = axios.create({
 
 const fetchWorldWonders = async()=>{
     const response = await instance.get("/wonders")
-    console.log(typeof response.data)
+    let worldWonders = response.data;
+    let keys = Object.keys(response.data);
+    for(let i = 0; i < worldWonders.length; i++){
+        console.log(worldWonders[keys[i]])
+    }
+    console.log(worldWonders)
 };
 fetchWorldWonders();
