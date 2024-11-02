@@ -6,14 +6,19 @@ const instance = axios.create({
 
 const fetchWorldWonders = async () => {
     const response = await instance.get("/wonders");
-    response.data.forEach(element => {
-        console.log(typeof element)
+    response.data.forEach(wonder => {
+        Object.keys(wonder).forEach(element => {
+            if (element === "name")
+                console.log("Name: " + wonder[element]);
+            if (element === "summary")
+                console.log("Summary: " + wonder[element]);
+            if (element === "links"){
+                const links = wonder[element];
+                console.log("Link: " + Object.values(links)[0]);
+                console.log("Image: " + Object.values(links)[4][1]);
+            }
+        });
     });
-
-    // let worldWonders = response.data[keysWorldWonders[i]];
-    // for (let j = 0; j < worldWonders.length; j++) {
-    //     console.log(worldWonders[Object.keys(worldWonders)[i]]);
-    // }
-
 };
+
 fetchWorldWonders();
