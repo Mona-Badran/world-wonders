@@ -57,17 +57,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     images_src_arr = Object.values(links_object.images);
                     console.log("images arr: " + typeof images_src_arr);
 
-                    // images_src_arr = links_object.images;
-                    // images_src_arr = Array.isArray(links_object.images) ? links_object.images : [];
-
-                    // const imageContainer = document.getElementById("imageContainer");
-                    // images_src_arr.forEach(src => {
-                    //     const img = document.createElement("img");
-                    //     img.src = src;
-                    //     img.style.width = "200px";
-                    //     imageContainer.appendChild(img);
-                    // });
-                    // console.log("Images: " + images_src_arr);
+                    const imageContainer = document.getElementById("imageContainer");
+                    images_src_arr.forEach(src => {
+                        const img = document.createElement("img");
+                        img.src = src;
+                        img.style.width = "200px";
+                        imageContainer.appendChild(img);
+                    });
 
                 }
             });
