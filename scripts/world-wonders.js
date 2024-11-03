@@ -7,27 +7,53 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const fetchWorldWonders = async () => {
         const response = await instance.get("/wonders");
+
+        const cardsContainer = document.getElementById("cardsContainer");
+
         response.data.forEach(wonder => {
+
+            let name = "";
+            let summary = "";
+            let linksObject = "";
+            let link = "";
+            let imagesrc = "";
+
             Object.keys(wonder).forEach(element => {
-                if (element === "name")
+                if (element === "name") {
+                    name = wonder[element];
                     console.log("Name: " + wonder[element]);
-                if (element === "summary")
+                }
+                if (element === "summary") {
+                    summary = wonder[element];
                     console.log("Summary: " + wonder[element]);
+                }
                 if (element === "links") {
-                    let links = wonder[element];
-                    console.log("Link: " + Object.values(links)[0]);
+                    linksObject = wonder[element];
+                    link = Object.values(linksObject)[0];
+                    console.log("Link: " + Object.values(linksObject)[0]);
 
-                    let imageContainer = document.getElementById("imageContainer")
-                    let imagesrc = Object.values(links)[4][1]
-                    console.log("Image: " + imagesrc);
+                    imagesrc = Object.values(linksObject)[4][1]
+                    // console.log("Image: " + imagesrc);
 
-                    let imgElement = document.createElement("img");
-                    imgElement.src = imagesrc;
-                    imgElement.alt = "World Wonder Image";
-
-                    imageContainer.appendChild(imgElement);
+                    // let imageContainer = document.getElementById("imageContainer")
                 }
             });
+            let card = document.createElement("div")
+            card.classList.add("card");
+            card.innerHTML = `
+            <img src="${imagesrc}" alt="World Wonder Image" class = "imageContainer">
+            <div class="container">
+                <h2>${name}</h2>
+                <button class = "btn">More Info</button>
+            </div>
+            `;
+            // let imgElement = document.createElement("img");
+            // imgElement.src = imagesrc;
+            // imgElement.alt = "World Wonder Image";
+            // imageContainer.appendChild(imgElement);
+
+            cardsContainer.innerHTML += card.outerHTML;
+
         });
     };
 
