@@ -13,7 +13,6 @@ document.addEventListener("DOMContentLoaded", () => {
         response.data.forEach(wonder => {
 
             let name = "";
-            let summary = "";
             let linksObject = "";
             let link = "";
             let imagesrc = "";
@@ -22,10 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (element === "name") {
                     name = wonder[element];
                     console.log("Name: " + wonder[element]);
-                }
-                if (element === "summary") {
-                    summary = wonder[element];
-                    console.log("Summary: " + wonder[element]);
                 }
                 if (element === "links") {
                     linksObject = wonder[element];
@@ -44,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <img src="${imagesrc}" alt="World Wonder Image" class = "imageContainer">
             <div class="container">
                 <h2>${name}</h2>
-                <button class = "btn">More Info</button>
+                <button class = "btn" onclick="window.location.href='${link}'">More Info</button>
             </div>
             `;
             // let imgElement = document.createElement("img");
