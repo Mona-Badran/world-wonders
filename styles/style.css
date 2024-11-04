@@ -4,8 +4,13 @@
     border: 0;
     box-sizing: border-box;
 }  
+body {
+    background-color: #f5f5f5;
+}
+
 h1 {
     margin-top: 20px;
+    margin-bottom: 20px;
     text-align: center; 
 }
 .flex-container{
@@ -62,4 +67,25 @@ h1 {
 .btn:hover {
     background-color: #0056b3;
     transform: translate(-2px);
+}
+.detailsContainer {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+.detailsContainer p {
+    margin: 10px 0;
+}
+
+.detailsContainer strong {
+    color: #2d5d8d;
+}
+
+.detailsContainer a {
+    color: #2d5d8d;
+    text-decoration: none;
 }
