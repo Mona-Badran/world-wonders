@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     const fetchWorldWonders = async () => {
         const response = await instance.get("/wonders");
-        
+
         response.data.forEach(wonder => {
 
             let name = "";
@@ -27,15 +27,28 @@ document.addEventListener("DOMContentLoaded", () => {
             Object.keys(wonder).forEach(element => {
                 if (element === "name") {
                     name = wonder[element];
-                    // console.log("Name: " + wonder[element]);
                 }
                 if (name === param) {
-                    if (element === "name") {
-                        console.log("Name: " + wonder[element]);
+                    if (element === "links") {
+                        links_object = wonder[element];
+                        images_src_arr = Object.values(links_object.images);
+
+                        const imageContainer = document.getElementById("imageContainer");
+                        images_src_arr.forEach(src => {
+                            const img = document.createElement("img");
+                            img.src = src;
+                            img.style.width = "200px";
+                            imageContainer.appendChild(img);
+                        });
+                        wiki_link = links_object.wiki;
+                        britannica_link = links_object.britannica;
+                        google_maps_link = links_object.google_maps;
+                        trip_advisor_link = links_object.trip_advisor;
+
                     }
                     if (element === "summary") {
                         summary = wonder[element];
-                        // console.log("summary: " + wonder[element]);
+                        // console.log("summary: " + summary);
                     }
                     if (element === "location") {
                         location = wonder[element];
@@ -49,43 +62,27 @@ document.addEventListener("DOMContentLoaded", () => {
                         time_period = wonder[element];
                         // console.log("time_period: " + wonder[element]);
                     }
-                    if (element === "links") {
-                        links_object = wonder[element];
-                        wiki_link = links_object.wiki;
-                        britannica_link = links_object.britannica;
-                        google_maps_link = links_object.google_maps;
-                        trip_advisor_link = links_object.trip_advisor;
+                    const heading = document.createElement("h1");
+                    heading.textContent = name;
+                    document.body.prepend(heading);
 
-                        // console.log("trip_advisor_link: " + trip_advisor_link);
-                        // console.log("britannica_link: " + britannica_link);
-                        // console.log("google_maps_link: " + google_maps_link);
+                    const detailsContainer = document.createElement("div");
+                    detailsContainer.classList.add("detailsContainer");
 
-                        // console.log("images: " + typeof links_object.images);
-
-                        images_src_arr = Object.values(links_object.images);
-                        // console.log("images arr: " + typeof images_src_arr);
-
-                        const imageContainer = document.getElementById("imageContainer");
-                        images_src_arr.forEach(src => {
-                            const img = document.createElement("img");
-                            img.src = src;
-                            img.style.width = "200px";
-                            imageContainer.appendChild(img);
-                        });
-                    }
+                    detailsContainer.innerHTML = `
+                        <p><strong>Summary:</strong> ${summary}</p>
+                        <p><strong>Location:</strong> ${location}</p>
+                        <p><strong>Build Year:</strong> ${build_year}</p>
+                        <p><strong>Time Period:</strong> ${time_period}</p>
+                        <p><strong>Wikipedia:</strong> <a href="${wiki_link}" target="_blank">View</a></p>
+                        <p><strong>Britannica:</strong> <a href="${britannica_link}" target="_blank">View</a></p>
+                        <p><strong>Google Maps:</strong> <a href="${google_maps_link}" target="_blank">View</a></p>
+                        <p><strong>TripAdvisor:</strong> <a href="${trip_advisor_link}" target="_blank">View</a></p>
+                    `;
+                    document.body.appendChild(detailsContainer);
+                    return;
                 }
             });
-            // let card = document.createElement("div")
-            // card.classList.add("card");
-            // card.innerHTML = `
-            // <img src="${imagesrc}" alt="World Wonder Image" class = "imageContainer">
-            // <div class="container">
-            //     <h2>${name}</h2>
-            //     <button class = "btn" onclick="window.location.href='${link}'">More Info</button>
-            // </div>
-            // `;
-
-            // cardsContainer.innerHTML += card.outerHTML;
 
         });
     };
