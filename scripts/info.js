@@ -1,5 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+    const urlParams = new URLSearchParams(window.location.search);
+    const param = urlParams.get('param');
+    console.log(param);
+
     const instance = axios.create({
         baseURL: "https://www.world-wonders-api.org/v0"
     });
@@ -19,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
             let britannica_link = "";
             let google_maps_link = "";
             let trip_advisor_link = "";
-        
+
             Object.keys(wonder).forEach(element => {
                 if (element === "name") {
                     name = wonder[element];
@@ -48,14 +52,14 @@ document.addEventListener("DOMContentLoaded", () => {
                     google_maps_link = links_object.google_maps;
                     trip_advisor_link = links_object.trip_advisor;
 
-                    console.log("trip_advisor_link: " + trip_advisor_link);
-                    console.log("britannica_link: " + britannica_link);
-                    console.log("google_maps_link: " + google_maps_link);
+                    // console.log("trip_advisor_link: " + trip_advisor_link);
+                    // console.log("britannica_link: " + britannica_link);
+                    // console.log("google_maps_link: " + google_maps_link);
 
-                    console.log("images: " + typeof links_object.images);
+                    // console.log("images: " + typeof links_object.images);
 
                     images_src_arr = Object.values(links_object.images);
-                    console.log("images arr: " + typeof images_src_arr);
+                    // console.log("images arr: " + typeof images_src_arr);
 
                     const imageContainer = document.getElementById("imageContainer");
                     images_src_arr.forEach(src => {

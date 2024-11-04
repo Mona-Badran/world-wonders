@@ -28,24 +28,21 @@ document.addEventListener("DOMContentLoaded", () => {
                     console.log("Link: " + Object.values(linksObject)[0]);
 
                     imagesrc = Object.values(linksObject)[4][1]
-                    // console.log("Image: " + imagesrc);
-
-                    // let imageContainer = document.getElementById("imageContainer")
                 }
             });
+
+            let param = name;
+            let url = `info.html?param=${encodeURIComponent(param)}`;
+
             let card = document.createElement("div")
             card.classList.add("card");
             card.innerHTML = `
-            <img src="${imagesrc}" alt="World Wonder Image" class = "imageContainer">
-            <div class="container">
+            <img src = "${imagesrc}" alt = "World Wonder Image" class = "imageContainer">
+            <div class = "container">
                 <h2>${name}</h2>
-                <button class = "btn" onclick="window.location.href='${link}'">More Info</button>
+                <button class = "btn" onclick = "window.location.href = '${url}'">More Info</button>
             </div>
             `;
-            // let imgElement = document.createElement("img");
-            // imgElement.src = imagesrc;
-            // imgElement.alt = "World Wonder Image";
-            // imageContainer.appendChild(imgElement);
 
             cardsContainer.innerHTML += card.outerHTML;
 
